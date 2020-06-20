@@ -60,7 +60,7 @@ After getting the repo,
 ### Ahmad Hesham Abdelkader
 
 - [linkedin.com/in/ahmedhesham16/](https://www.linkedin.com/in/ahmedhesham16/)
-- [github.com/AhmadSherief](https://github.com/ahmedhesham6)
+- [github.com/ahmedhesham6](https://github.com/ahmedhesham6)
 
 ## Copyright and License
 
