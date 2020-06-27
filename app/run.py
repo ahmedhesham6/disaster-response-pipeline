@@ -26,11 +26,11 @@ def tokenize(text):
     return clean_tokens
 
 # load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
+engine = create_engine("sqlite:///../data/DisasterResponse.db")
+df = pd.read_sql_table("appen", engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -39,31 +39,46 @@ model = joblib.load("../models/your_model_name.pkl")
 def index():
     
     # extract data needed for visuals
-    # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+                       
+    related_counts = df.groupby("related").count()['message']/df.shape[0]*100
+    related_names = ['Not related','Related']
+
+    df_categories = df[df['related']==1].drop(['id','message','original','genre','related'],axis=1).sum().sort_values(ascending=False)
+    category_means = df_categories.values
+    category_names = df_categories.index
     
     # create visuals
-    # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
-            'data': [
-                Bar(
-                    x=genre_names,
-                    y=genre_counts
-                )
-            ],
-
-            'layout': {
-                'title': 'Distribution of Message Genres',
-                'yaxis': {
-                    'title': "Count"
-                },
-                'xaxis': {
-                    'title': "Genre"
-                }
-            }
-        }
+            "data": [Bar(x=genre_names, y=genre_counts)],
+            "layout": {
+                "title": "Distribution of Message Genres",
+                "yaxis": {"title": "Count"},
+                "xaxis": {"title": "Genre"},
+            },
+        },
+        {
+            "data": [Pie(values=related_counts, labels=related_names)],
+            "layout": {
+                "title": "Percentage of disaster related messages",
+            },
+        },
+        {
+            "data": [Bar(x=category_names, y=category_means)],
+            "layout": {
+                "title": "Distribution of Related Message Categories",
+                "yaxis": {"title": "Number of Messages"},
+                "xaxis": {
+                    "automargin": True,
+                    "title": {
+                        "text":"Category",
+                        "standoff" : 20
+                    },
+                    "tickangle": -45,},
+            },
+        },
     ]
     
     # encode plotly graphs in JSON

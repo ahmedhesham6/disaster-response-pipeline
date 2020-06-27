@@ -18,6 +18,22 @@ There are 2 options available:
 - Clone the repo: `git clone https://github.com/ahmedhesham6/disaster-response-pipeline.git`
 - [Download the latest release](https://github.com/ahmedhesham6/disaster-response-pipeline/archive/master.zip)
 
+Initialize Enviroment:
+
+> conda env create -f environment.yml
+
+Activate Eniviroment:
+
+> conda activate disaster-response
+
+Run Application:
+
+> cd app
+
+> python run.py
+
+- Go to http://0.0.0.0:3001/
+
 ## Project Motivation
 
 The objective of this project is to help people in disasters, when help in needed the most, by build an application where people having an emergency can input a new message which then gets classified to its relevant categories. This application can be extended to forward the message to its relevant specialized organization.

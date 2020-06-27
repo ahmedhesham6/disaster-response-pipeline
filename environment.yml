@@ -1,0 +1,15 @@
+name: disaster-response
+dependencies:
+- python
+- pip
+- matplotlib
+- scipy
+- numpy==1.15
+- pandas
+- plotly
+- nltk
+- flask
+- sqlalchemy
+- pylint
+- pip:
+    - sklearn
